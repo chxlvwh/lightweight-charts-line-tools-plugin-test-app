@@ -31,6 +31,14 @@ Thanks to the automated build scripts in the suite, getting the test environment
 
 ## 🛠 Features & Testing Workflow
 
+### 📋 Comprehensive Validation Spreadsheet
+Located in the root directory (`line_tools_plugin_testing.ods`), this document serves as the master QA record for the project.
+
+*   **Methodology:** Using the **"Generate All Tests"** feature (see Section 5), every single configuration option permutation was visually inspected and logged. Have a look at the [TOOL NAME]TestConfig.js file in the TestConfig folder to see all the options that are logged into the spreadsheet.
+*   **Coverage:** Contains a dedicated sheet for all 21 line tools.
+*   **Status Tracking:** Records specific results for every property: ✅ **Works**, ⚪ **N/A**, or ❌ **Fail** (with detailed issue logs).
+
+### The Test App
 The Test App is organized into five functional sections that mirror the internal API surface of the Core.
 
 ### 1. Event Subscriptions
