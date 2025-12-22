@@ -5,8 +5,7 @@
 This is the official testing and validation suite for the [Line Tools Core](https://github.com/difurious/lightweight-charts-line-tools-core) and its 12 companion plugins. It is a react ap to provide a comprehensive, interactive environment to ensure that all 21 drawing tools function perfectly within [Lightweight Charts v5+](https://github.com/tradingview/lightweight-charts).
 
 ## 🎥 Video Demo
-
-**Coming Soon!**
+https://github.com/user-attachments/assets/900a6759-d0cd-42e5-a09c-7ed0d94bd42e
 
 ## 🚀 Getting Started
 
