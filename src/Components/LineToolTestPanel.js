@@ -57,9 +57,22 @@ import FibRetracementToolProgrammatic from './FibRetracementToolProgrammatic';
 import MarketDepthToolInteractive from './MarketDepthToolInteractive';
 import MarketDepthToolProgrammatic from './MarketDepthToolProgrammatic';
 
+import Pane1TestPanel from './Pane1TestPanel';
 
-const LineToolTestPanel = ({ lineToolsPluginRef, chartInstanceRef, candlestickSeriesRef, chartReady }) => {
-	const lineToolsApi = useLineToolsApi(lineToolsPluginRef);
+
+const LineToolTestPanel = ({ 
+	lineToolsPluginRef0, 
+	lineToolsPluginRef1, 
+	chartInstanceRef, 
+	candlestickSeriesRef0, 
+	candlestickSeriesRef1,
+	chartReady,
+	pane1Interval,
+	setPane1Interval 
+}) => {
+	// Initialize two separate API instances for independent control
+	const api0 = useLineToolsApi(lineToolsPluginRef0);
+	const api1 = useLineToolsApi(lineToolsPluginRef1);
 
 	// --- Accordion Expanded State ---
 	// Default expanded state to keep the main tool panels open
@@ -78,100 +91,101 @@ const LineToolTestPanel = ({ lineToolsPluginRef, chartInstanceRef, candlestickSe
 
 			{/* Section 1: Core API Tests (Event Subscriptions, Removal, Export/Import, Crosshair) */}
 			<CoreApiTestPanel
-				lineToolsApi={lineToolsApi}
+				api0={api0}
+				api1={api1}
+				lineToolsApi={api0}
 				chartInstanceRef={chartInstanceRef}
-				candlestickSeriesRef={candlestickSeriesRef}
+				candlestickSeriesRef={candlestickSeriesRef0}
 				chartReady={chartReady}
 			/>
-
-			{/* Section 2: Interactive Drawing (Nested Accordions for Each Tool) */}
+			{/* Section 2: Interactive Drawing (Targeting api0) */}
 			<Accordion onChange={handleChange('interactivePanel')} sx={{ mb: 2 }}>
 				<AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant="h6">4. Interactive Drawing (Click Chart to Draw)</Typography></AccordionSummary>
 				<AccordionDetails>
 					<Grid container spacing={2}>
 						{/* Nested Accordion for Rectangle Tool (Interactive) */}
 						<Grid item size={12}>
-							<RectangleToolInteractive lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<RectangleToolInteractive lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for TrendLine Tool (Interactive) */}
 						<Grid item size={12}>
-							<TrendLineToolInteractive lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<TrendLineToolInteractive lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for Circle Tool (Interactive) */}
 						<Grid item size={12}>
-							<CircleToolInteractive lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<CircleToolInteractive lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for Brush Tool (Interactive) */}
 						<Grid item size={12}>
-							<BrushToolInteractive lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<BrushToolInteractive lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for Highlighter Tool (Interactive) */}
 						<Grid item size={12}>
-							<HighlighterToolInteractive lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<HighlighterToolInteractive lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for Path Tool (Interactive) */}
 						<Grid item size={12}>
-							<PathToolInteractive lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<PathToolInteractive lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>		
 						{/* Nested Accordion for Triangle Tool (Interactive) */}
 						<Grid item size={12}>
-							<TriangleToolInteractive lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<TriangleToolInteractive lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>	
 						{/* Nested Accordion for ExtendedLine Tool (Interactive) */}
 						<Grid item size={12}>
-							<ExtendedLineToolInteractive lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<ExtendedLineToolInteractive lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for Arrow Tool (Interactive) */}
 						<Grid item size={12}>
-							<ArrowToolInteractive lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<ArrowToolInteractive lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for Ray Tool (Interactive) */}
 						<Grid item size={12}>
-							<RayToolInteractive lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<RayToolInteractive lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for HorizontalLine Tool (Interactive) */}
 						<Grid item size={12}>
-							<HorizontalLineToolInteractive lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<HorizontalLineToolInteractive lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>		
 						{/* Nested Accordion for HorizontalRay Tool (Interactive) */}
 						<Grid item size={12}>
-							<HorizontalRayToolInteractive lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<HorizontalRayToolInteractive lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for VerticalLine Tool (Interactive) */}
 						<Grid item size={12}>
-							<VerticalLineToolInteractive lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<VerticalLineToolInteractive lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for CrossLine Tool (Interactive) */}
 						<Grid item size={12}>
-							<CrossLineToolInteractive lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<CrossLineToolInteractive lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for Text Tool (Interactive) */}
 						<Grid item size={12}>
-							<TextToolInteractive lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<TextToolInteractive lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for Callout Tool (Interactive) */}
 						<Grid item size={12}>
-							<CalloutToolInteractive lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<CalloutToolInteractive lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for ParallelChannel Tool (Interactive) */}
 						<Grid item size={12}>
-							<ParallelChannelToolInteractive lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<ParallelChannelToolInteractive lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for PriceRange Tool (Interactive) */}
 						<Grid item size={12}>
-							<PriceRangeToolInteractive lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<PriceRangeToolInteractive lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for LongShortPosition Tool (Interactive) */}
 						<Grid item size={12}>
-							<LongShortPositionToolInteractive lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<LongShortPositionToolInteractive lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for FibRetracement Tool (Interactive) */}
 						<Grid item size={12}>
-							<FibRetracementToolInteractive lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<FibRetracementToolInteractive lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for MarketDepth Tool (Interactive) */}
 						<Grid item size={12}>
-							<MarketDepthToolInteractive lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<MarketDepthToolInteractive lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>								
 					</Grid>
 				</AccordionDetails>
@@ -184,90 +198,98 @@ const LineToolTestPanel = ({ lineToolsPluginRef, chartInstanceRef, candlestickSe
 					<Grid container spacing={2}>
 						{/* Nested Accordion for Rectangle Tool (Programmatic) */}
 						<Grid item size={12}>
-							<RectangleToolProgrammatic lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<RectangleToolProgrammatic lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for TrendLine Tool (Programmatic) */}
 						<Grid item size={12}>
-							<TrendLineToolProgrammatic lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<TrendLineToolProgrammatic lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for Circle Tool (Programmatic) */}
 						<Grid item size={12}>
-							<CircleToolProgrammatic lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<CircleToolProgrammatic lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for Brush Tool (Programmatic) */}
 						<Grid item size={12}>
-							<BrushToolProgrammatic lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<BrushToolProgrammatic lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for Highlighter Tool (Programmatic) */}
 						<Grid item size={12}>
-							<HighlighterToolProgrammatic lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<HighlighterToolProgrammatic lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						<Grid item size={12}>
-							<PathToolProgrammatic lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<PathToolProgrammatic lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>		
 						{/* Nested Accordion for Triangle Tool (Programmatic) */}
 						<Grid item size={12}>
-							<TriangleToolProgrammatic lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<TriangleToolProgrammatic lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>		
 						{/* Nested Accordion for ExtendedLine Tool (Programmatic) */}
 						<Grid item size={12}>
-							<ExtendedLineToolProgrammatic lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<ExtendedLineToolProgrammatic lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>	
 						{/* Nested Accordion for Arrow Tool (Programmatic) */}
 						<Grid item size={12}>
-							<ArrowToolProgrammatic lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<ArrowToolProgrammatic lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for Ray Tool (Programmatic) */}
 						<Grid item size={12}>
-							<RayToolProgrammatic lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<RayToolProgrammatic lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for HorizontalLine Tool (Programmatic) */}
 						<Grid item size={12}>
-							<HorizontalLineToolProgrammatic lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<HorizontalLineToolProgrammatic lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for HorizontalRay Tool (Programmatic) */}
 						<Grid item size={12}>
-							<HorizontalRayToolProgrammatic lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<HorizontalRayToolProgrammatic lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for VerticalLine Tool (Programmatic) */}
 						<Grid item size={12}>
-							<VerticalLineToolProgrammatic lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<VerticalLineToolProgrammatic lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for CrossLine Tool (Programmatic) */}
 						<Grid item size={12}>
-							<CrossLineToolProgrammatic lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<CrossLineToolProgrammatic lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for Text Tool (Programmatic) */}
 						<Grid item size={12}>
-							<TextToolProgrammatic lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<TextToolProgrammatic lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for Callout Tool (Programmatic) */}
 						<Grid item size={12}>
-							<CalloutToolProgrammatic lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<CalloutToolProgrammatic lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for ParallelChannel Tool (Programmatic) */}
 						<Grid item size={12}>
-							<ParallelChannelToolProgrammatic lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<ParallelChannelToolProgrammatic lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for PriceRange Tool (Programmatic) */}
 						<Grid item size={12}>
-							<PriceRangeToolProgrammatic lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<PriceRangeToolProgrammatic lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for LongShortPosition Tool (Programmatic) */}
 						<Grid item size={12}>
-							<LongShortPositionToolProgrammatic lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<LongShortPositionToolProgrammatic lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for FibRetracement Tool (Programmatic) */}
 						<Grid item size={12}>
-							<FibRetracementToolProgrammatic lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<FibRetracementToolProgrammatic lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>
 						{/* Nested Accordion for MarketDepth Tool (Programmatic) */}
 						<Grid item size={12}>
-							<MarketDepthToolProgrammatic lineToolsApi={lineToolsApi} chartReady={chartReady} />
+							<MarketDepthToolProgrammatic lineToolsApi={api0} chartReady={chartReady} />
 						</Grid>			
 					</Grid>
 				</AccordionDetails>
 			</Accordion>
+			{/* Section 4: Pane 1 Experimental Lab [NEW] */}
+			<Pane1TestPanel 
+				api1={api1}
+				candlestickSeriesRef1={candlestickSeriesRef1}
+				chartReady={chartReady}
+				pane1Interval={pane1Interval}
+				setPane1Interval={setPane1Interval}
+			/>
 		</Box>
 	);
 };

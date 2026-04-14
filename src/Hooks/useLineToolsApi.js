@@ -5,8 +5,19 @@ import { useCallback } from 'react';
 // --- Internal logging helper (Defined OUTSIDE component to prevent dependency issues) ---
 const logCall = (methodName, params, response) => {
 	console.log(`%c-> Calling ${methodName}`, 'color: #1E90FF; font-weight: bold;', 'with params:', params);
+	
 	if (response !== undefined) {
-		console.log(`%c<- Received response for ${methodName}`, 'color: #32CD32; font-weight: bold;', ':', response);
+		let processedResponse = response;
+
+		// If it's a string (like a JSON export), we parse it.
+		// If it's an array (like our new data fetch), it passes through as a raw object.
+		if (typeof response === 'string') {
+			try {
+				processedResponse = JSON.parse(response);
+			} catch (e) {}
+		}
+
+		console.log(`%c<- Received response for ${methodName}`, 'color: #32CD32; font-weight: bold;', ':', processedResponse);
 	}
 };
 
@@ -22,11 +33,11 @@ const logCall = (methodName, params, response) => {
  */
 
 /**
- * Custom React hook to interact with the Line Tools Core Plugin API.
+ * Custom React hook to interact with a specific Line Tools Core Plugin instance.
  * Encapsulates the plugin's functionality and provides structured logging.
  *
- * @param {React.MutableRefObject<ILineToolsApi | null>} lineToolsPluginRef - The React ref object holding the Line Tools Plugin instance.
- * @returns {Object} An object containing wrapped ILineToolsApi methods with logging.
+ * @param {React.MutableRefObject<ILineToolsApi | null>} lineToolsPluginRef - The ref holding a specific Plugin instance.
+ * @returns {Object} An object containing wrapped ILineToolsApi methods.
  */
 export const useLineToolsApi = (lineToolsPluginRef) => {
 
@@ -171,7 +182,7 @@ export const useLineToolsApi = (lineToolsPluginRef) => {
 		const api = ensurePlugin();
 		if (api) {
 			api.subscribeLineToolsAfterEdit(handler);
-			console.log(`%c-> Subscribed to AfterEdit events`, 'color: #FFA500; font-weight: bold;');
+			console.log(`%c-> Subscribed to Pane 0 AfterEdit events`, 'color: #FFA500; font-weight: bold;');
 		}
 	}, [ensurePlugin]);
 
@@ -179,7 +190,7 @@ export const useLineToolsApi = (lineToolsPluginRef) => {
 		const api = ensurePlugin();
 		if (api) {
 			api.unsubscribeLineToolsAfterEdit(handler);
-			console.log(`%c-> Unsubscribed from AfterEdit events`, 'color: #FFA500; font-weight: bold;');
+			console.log(`%c-> Unsubscribed from Pane 0 AfterEdit events`, 'color: #FFA500; font-weight: bold;');
 		}
 	}, [ensurePlugin]);
 
@@ -187,7 +198,7 @@ export const useLineToolsApi = (lineToolsPluginRef) => {
 		const api = ensurePlugin();
 		if (api) {
 			api.subscribeLineToolsDoubleClick(handler);
-			console.log(`%c-> Subscribed to DoubleClick events`, 'color: #FFA500; font-weight: bold;');
+			console.log(`%c-> Subscribed to Pane 0 DoubleClick events`, 'color: #FFA500; font-weight: bold;');
 		}
 	}, [ensurePlugin]);
 
@@ -195,9 +206,151 @@ export const useLineToolsApi = (lineToolsPluginRef) => {
 		const api = ensurePlugin();
 		if (api) {
 			api.unsubscribeLineToolsDoubleClick(handler);
-			console.log(`%c-> Unsubscribed from DoubleClick events`, 'color: #FFA500; font-weight: bold;');
+			console.log(`%c-> Unsubscribed from Pane 0 DoubleClick events`, 'color: #FFA500; font-weight: bold;');
 		}
 	}, [ensurePlugin]);
+
+
+	const setMagnetThreshold = useCallback((pixels) => {
+		const api = ensurePlugin();
+		if (api) {
+			api.setMagnetThreshold(pixels);
+			logCall('setMagnetThreshold', { pixels }, '(void)');
+		}
+	}, [ensurePlugin]);
+
+	const setTimeFormatter = useCallback((formatter) => {
+		const api = ensurePlugin();
+		if (api) {
+			// 1. Pass the value directly. The Core Plugin now handles 
+			// the synchronization with the native chart options.
+			api.setTimeFormatter(formatter);
+
+			// 2. Log exactly what was sent to the orchestrator.
+			const logValue = formatter === null ? 'null (RESET TO DEFAULT)' : 'Custom Function';
+			logCall('setTimeFormatter', { value: logValue }, '(void)');
+		}
+	}, [ensurePlugin]);
+
+	const setLocked = useCallback((locked) => {
+		const api = ensurePlugin();
+		if (api) {
+			api.setLocked(locked);
+			logCall('setLocked', { locked }, '(void)');
+		}
+	}, [ensurePlugin]);
+
+	const isLocked = useCallback(() => {
+		const api = ensurePlugin();
+		if (api) {
+			const locked = api.isLocked();
+			logCall('isLocked', {}, locked);
+			return locked;
+		}
+		return false;
+	}, [ensurePlugin]);
+
+	const destroy = useCallback(() => {
+		const api = ensurePlugin();
+		if (api) {
+			api.destroy();
+			logCall('destroy', {}, '(void)');
+		}
+	}, [ensurePlugin]);
+
+	// --- NEW v1.1 Data Lookup Engine Methods ---
+
+	const getBarAtTime = useCallback((time) => {
+		const api = ensurePlugin();
+		if (api) {
+			const bar = api.getBarAtTime(time);
+			logCall('getBarAtTime', { time }, bar);
+			return bar;
+		}
+		return null;
+	}, [ensurePlugin]);
+
+	const getClosestBar = useCallback((time, mode) => {
+		const api = ensurePlugin();
+		if (api) {
+			const bar = api.getClosestBar(time, mode);
+			logCall('getClosestBar', { time, mode }, bar);
+			return bar;
+		}
+		return null;
+	}, [ensurePlugin]);
+
+	const getBarAtCoordinate = useCallback((x) => {
+		const api = ensurePlugin();
+		if (api) {
+			const bar = api.getBarAtCoordinate(x);
+			logCall('getBarAtCoordinate', { x }, bar);
+			return bar;
+		}
+		return null;
+	}, [ensurePlugin]);
+
+	const getEarliestBar = useCallback(() => {
+		const api = ensurePlugin();
+		if (api) {
+			const bar = api.getEarliestBar();
+			logCall('getEarliestBar', {}, bar);
+			return bar;
+		}
+		return null;
+	}, [ensurePlugin]);
+
+	const getLatestBar = useCallback(() => {
+		const api = ensurePlugin();
+		if (api) {
+			const bar = api.getLatestBar();
+			logCall('getLatestBar', {}, bar);
+			return bar;
+		}
+		return null;
+	}, [ensurePlugin]);
+
+	const getFullTimeRange = useCallback(() => {
+		const api = ensurePlugin();
+		if (api) {
+			const range = api.getFullTimeRange();
+			logCall('getFullTimeRange', {}, range);
+			return range;
+		}
+		return null;
+	}, [ensurePlugin]);
+
+	const getDataInRange = useCallback((range) => {
+		const api = ensurePlugin();
+		if (api) {
+			const data = api.getDataInRange(range);
+			
+			// CHANGE: Pass the 'data' array itself, not a string describing its length.
+			// This allows logCall to print the full, interactive array to the console.
+			logCall('getDataInRange', { range }, data); 
+			
+			return data;
+		}
+		return [];
+	}, [ensurePlugin]);
+
+	// --- NEW v1.1 Selection Event Methods ---
+
+	const subscribeLineToolsSingleClick = useCallback((handler) => {
+		const api = ensurePlugin();
+		if (api) {
+			api.subscribeLineToolsSingleClick(handler);
+			console.log(`%c-> Subscribed to Pane 0 SingleClick events`, 'color: #FFA500; font-weight: bold;');
+		}
+	}, [ensurePlugin]);
+
+	const unsubscribeLineToolsSingleClick = useCallback((handler) => {
+		const api = ensurePlugin();
+		if (api) {
+			api.unsubscribeLineToolsSingleClick(handler);
+			console.log(`%c-> Unsubscribed from Pane 0 SingleClick events`, 'color: #FFA500; font-weight: bold;');
+		}
+	}, [ensurePlugin]);	
 
 	// Return all wrapped methods
 	return {
@@ -219,5 +372,22 @@ export const useLineToolsApi = (lineToolsPluginRef) => {
 		unsubscribeLineToolsAfterEdit,
 		subscribeLineToolsDoubleClick,
 		unsubscribeLineToolsDoubleClick,
+		// New Config/Control
+		setMagnetThreshold,
+		setTimeFormatter,
+		setLocked,
+		isLocked,
+		destroy,
+		// New Data Inspection
+		getBarAtTime,
+		getClosestBar,
+		getBarAtCoordinate,
+		getEarliestBar,
+		getLatestBar,
+		getFullTimeRange,
+		getDataInRange,
+		// New Events
+		subscribeLineToolsSingleClick,
+		unsubscribeLineToolsSingleClick,
 	};
 };

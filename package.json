@@ -5,31 +5,31 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
-    "@mui/icons-material": "^7.3.2",
-    "@mui/material": "^7.3.2",
-    "@mui/system": "^7.3.2",
+    "@mui/icons-material": "^9.0.0",
+    "@mui/material": "^9.0.0",
+    "@mui/system": "^9.0.0",
     "@testing-library/dom": "^10.4.1",
-    "@testing-library/jest-dom": "^6.8.0",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "lightweight-charts": "^5.0.9",
-    "lightweight-charts-line-tools-core": "github:difurious/lightweight-charts-line-tools-core",
-    "lightweight-charts-line-tools-circle": "github:difurious/lightweight-charts-line-tools-circle",
-    "lightweight-charts-line-tools-fib-retracement": "github:difurious/lightweight-charts-line-tools-fib-retracement",
-    "lightweight-charts-line-tools-freehand": "github:difurious/lightweight-charts-line-tools-freehand",
-    "lightweight-charts-line-tools-lines": "github:difurious/lightweight-charts-line-tools-lines",
-    "lightweight-charts-line-tools-long-short-position": "github:difurious/lightweight-charts-line-tools-long-short-position",
-    "lightweight-charts-line-tools-market-depth": "github:difurious/lightweight-charts-line-tools-market-depth",
-    "lightweight-charts-line-tools-parallel-channel": "github:difurious/lightweight-charts-line-tools-parallel-channel",
-    "lightweight-charts-line-tools-path": "github:difurious/lightweight-charts-line-tools-path",
-    "lightweight-charts-line-tools-price-range": "github:difurious/lightweight-charts-line-tools-price-range",
-    "lightweight-charts-line-tools-rectangle": "github:difurious/lightweight-charts-line-tools-rectangle",
-    "lightweight-charts-line-tools-text": "github:difurious/lightweight-charts-line-tools-text",
-    "lightweight-charts-line-tools-triangle": "github:difurious/lightweight-charts-line-tools-triangle",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "lightweight-charts": "^5.1.0",
+    "lightweight-charts-line-tools-circle": "file:../../lightweight-charts-line-tools-circle",
+    "lightweight-charts-line-tools-core": "file:../../lightweight-charts-line-tools-core",
+    "lightweight-charts-line-tools-fib-retracement": "file:../../lightweight-charts-line-tools-fib-retracement",
+    "lightweight-charts-line-tools-freehand": "file:../../lightweight-charts-line-tools-freehand",
+    "lightweight-charts-line-tools-lines": "file:../../lightweight-charts-line-tools-lines",
+    "lightweight-charts-line-tools-long-short-position": "file:../../lightweight-charts-line-tools-long-short-position",
+    "lightweight-charts-line-tools-market-depth": "file:../../lightweight-charts-line-tools-market-depth",
+    "lightweight-charts-line-tools-parallel-channel": "file:../../lightweight-charts-line-tools-parallel-channel",
+    "lightweight-charts-line-tools-path": "file:../../lightweight-charts-line-tools-path",
+    "lightweight-charts-line-tools-price-range": "file:../../lightweight-charts-line-tools-price-range",
+    "lightweight-charts-line-tools-rectangle": "file:../../lightweight-charts-line-tools-rectangle",
+    "lightweight-charts-line-tools-text": "file:../../lightweight-charts-line-tools-text",
+    "lightweight-charts-line-tools-triangle": "file:../../lightweight-charts-line-tools-triangle",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^5.2.0"
   },
   "keywords": [
     "lightweight-charts",
@@ -44,7 +44,7 @@
     "automated tests",
     "unit testing",
     "integration testing"
-  ],  
+  ],
   "scripts": {
     "start": "cross-env PORT=3001 react-scripts start",
     "build": "react-scripts build",
@@ -70,7 +70,7 @@
     ]
   },
   "devDependencies": {
-    "baseline-browser-mapping": "^2.8.32",
-    "cross-env": "^10.0.0"
+    "baseline-browser-mapping": "^2.10.18",
+    "cross-env": "^10.1.0"
   }
 }

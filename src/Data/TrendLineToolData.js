@@ -182,3 +182,25 @@ export const trendX_UpdatedOptions = {
 	visible: true,
 	editable: true,
 };
+
+/**
+ * Options for tools used to test targeted retrieval (ByID and ByRegex).
+ * These use distinct colors to make them easily identifiable on the chart.
+ */
+export const taggedTrendLineOptions = {
+	debug1: {
+		...defaultTrendLineOptions,
+		line: { ...defaultTrendLineOptions.line, color: '#6177bf', width: 2 },
+		text: { ...defaultTrendLineOptions.text, value: 'TARGET: DEBUG_1' },
+	},
+	debug2: {
+		...defaultTrendLineOptions,
+		line: { ...defaultTrendLineOptions.line, color: '#0bff0b', width: 2 },
+		text: { ...defaultTrendLineOptions.text, value: 'TARGET: DEBUG_2' },
+	},
+	regex1: {
+		...defaultTrendLineOptions,
+		line: { ...defaultTrendLineOptions.line, color: '#ffffff', width: 2 },
+		text: { ...defaultTrendLineOptions.text, value: 'TARGET: REGEX_TEST_1' },
+	}
+};
