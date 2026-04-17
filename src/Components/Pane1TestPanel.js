@@ -42,7 +42,7 @@ const Pane1TestPanel = ({ api1, candlestickSeriesRef1, chartReady, pane1Interval
 		<Accordion sx={{ mb: 2, border: '1px solid #2196F3' }}>
 			<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 				<Stack direction="row" spacing={2} alignItems="center">
-					<Typography variant="h6">Pane 1: Multi-Interval Lab</Typography>
+					<Typography variant="h6">8. Pane 1: Multi-Interval Lab</Typography>
 					<Chip 
 						label={pane1Interval === 'daily' ? 'Daily Data' : '4-Hour Data'} 
 						color="primary" 

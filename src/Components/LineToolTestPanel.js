@@ -100,7 +100,7 @@ const LineToolTestPanel = ({
 			/>
 			{/* Section 2: Interactive Drawing (Targeting api0) */}
 			<Accordion onChange={handleChange('interactivePanel')} sx={{ mb: 2 }}>
-				<AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant="h6">4. Interactive Drawing (Click Chart to Draw)</Typography></AccordionSummary>
+				<AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant="h6">6. Interactive Drawing (Click Chart to Draw)</Typography></AccordionSummary>
 				<AccordionDetails>
 					<Grid container spacing={2}>
 						{/* Nested Accordion for Rectangle Tool (Interactive) */}
@@ -193,7 +193,7 @@ const LineToolTestPanel = ({
 
 			{/* Section 3: Programmatic Tool Creation (Nested Accordions for Each Tool) */}
 			<Accordion onChange={handleChange('programmaticPanel')} sx={{ mb: 2 }}>
-				<AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant="h6">5. Programmatic Tool Creation</Typography></AccordionSummary>
+				<AccordionSummary expandIcon={<ExpandMoreIcon />}><Typography variant="h6">7. Programmatic Tool Creation</Typography></AccordionSummary>
 				<AccordionDetails>
 					<Grid container spacing={2}>
 						{/* Nested Accordion for Rectangle Tool (Programmatic) */}

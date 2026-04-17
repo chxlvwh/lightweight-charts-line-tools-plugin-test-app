@@ -125,14 +125,15 @@ export const useCoreApiTest = (api0, api1, chartRef, series0Ref, chartReady) => 
 	const handleCreateTaggedTools = useCallback(() => {
 		// Creates specific tools to test Targeted Retrieval
 		const day = 24 * 60 * 60;
-		const baseTime = 1756857600; // Sept 1, 2025
+		// Sept 1, 2025 00:00:00 UTC (The first Monday)
+		const baseTime = 1756684800; 
 		
 		// [FIX] Changed 'time' to 'timestamp' to match Core v1.1 LineToolPoint interface
 		api0.createOrUpdateLineTool(
 			'TrendLine', 
 			[
 				{ timestamp: baseTime, price: 190 }, 
-				{ timestamp: baseTime + day * 5, price: 190 }
+				{ timestamp: baseTime + day * 4, price: 190 } // End on Friday Sep 5
 			], 
 			taggedTrendLineOptions.debug1, 
 			'DEBUG_1'
@@ -337,20 +338,20 @@ export const useCoreApiTest = (api0, api1, chartRef, series0Ref, chartReady) => 
 
 	/**
 	 * Tests the getBarAtTime method using multiple input formats.
-	 * Proves that the API correctly resolves raw timestamps and ISO strings
-	 * into the same internal search keys.
+	 * Fixed: Timestamps now strictly align to UTC midnight boundaries.
 	 */
 	const logExactBarLookups = useCallback(() => {
-		const tsWed = 1757452800; // Wed, Sep 10, 2025
-		const strMon = "2025-09-15"; // Mon, Sep 15, 2025
+		// Sept 10, 2025 00:00:00 UTC
+		const tsWed = 1757462400; 
+		const strMon = "2025-09-15"; 
 
 		console.log("%c--- DATA PROOF: Exact Lookups (Polymorphic) ---", 'color: #00BFFF; font-weight: bold;');
 
-		// 1. Test Number Input: Should return the Sept 10 bar
+		// 1. Test Number Input: Expecting Wed Sept 10
 		console.log(`%cLookup by Timestamp: %c${tsWed} (${formatTimestampUTC(tsWed)})`, 'font-weight: bold;', 'color: #AAA;');
 		api0.getBarAtTime(tsWed);
 
-		// 2. Test String Input: Should return the Sept 15 bar
+		// 2. Test String Input: Expecting Mon Sept 15
 		console.log(`%cLookup by Date String: %c"${strMon}"`, 'font-weight: bold;', 'color: #AAA;');
 		api0.getBarAtTime(strMon);
 	}, [api0]);
@@ -360,17 +361,23 @@ export const useCoreApiTest = (api0, api1, chartRef, series0Ref, chartReady) => 
 	 * Proves that ISO strings work for gap-handling and range-slicing.
 	 */
 	const logPolymorphicSearch = useCallback(() => {
-		const strSat = "2025-09-06"; // Saturday (Gap)
-		const range = { from: "2025-09-01", to: "2025-09-05" }; // Full first work week
+		const strSat = "2025-09-06"; // Target: Saturday
+		const tsFri = 1757030400;    // Expected result (Friday)
+		
+		const range = { from: "2025-09-01", to: "2025-09-05" }; // Mon-Fri
 
 		console.log("%c--- DATA PROOF: String-Based Smart Search ---", 'color: #00BFFF; font-weight: bold;');
 
 		// Proof 1: getClosestBar handles strings over weekend gaps
-		console.log(`%cClosestBar 'floor' (String "Saturday"): %cExpected Friday Sept 5`, 'font-weight: bold;', 'color: #AAA;');
+		console.log(
+			`%cClosestBar 'floor' (String "${strSat}"): %cExpected ${formatTimestampUTC(tsFri)}`, 
+			'font-weight: bold;', 
+			'color: #AAA;'
+		);
 		api0.getClosestBar(strSat, 'floor');
 
 		// Proof 2: getDataInRange handles string boundaries correctly
-		console.log(`%cRange Fetch (String "Sept 1" to "Sept 5"): %cExpected 5 Bars (Mon-Fri)`, 'font-weight: bold;', 'color: #AAA;');
+		console.log(`%cRange Fetch (Strings "Sep 01" to "Sep 05"): %cExpected 5 Bars (Mon-Fri)`, 'font-weight: bold;', 'color: #AAA;');
 		api0.getDataInRange(range);
 	}, [api0]);
 
