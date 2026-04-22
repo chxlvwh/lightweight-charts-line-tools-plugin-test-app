@@ -100,7 +100,7 @@ This section tests the plugin's ability to manipulate global chart state and ver
     *   **Localization Sync**: Validates `setTimeFormatter()`. The plugin acts as a proxy for the chart's native localization. By toggling these, you prove that the plugin automatically "repairs" the time axis labels in the blank space (where native LWC normally stops displaying time) to match the custom format provided to the chart.
 
 *   **Programmatic Crosshair Control**:
-    *   **Coordinate Jumping**: Tests `setCrossHairXY(x, y)`. This verifies that the API can override user mouse movement to jump to specific data points or screen coordinates.
+    *   **Coordinate Jumping**: Tests `setCrossHairXY`API. This confirms that the chart can be "remote controlled" to show the crosshair at specific times and prices, which is essential for keeping multiple charts perfectly aligned as you move your mouse.
     *   **Native Snapping Disclaimer**: Note that while the API accepts arbitrary coordinates, **Lightweight Charts natively snaps the vertical crosshair line to the nearest discrete data bar index that exists. It cannot move to the blank space because that data does not exist.** 
     *   **Future-Proofing**: We manually inject the time label when jumping into the future ("Blank Space"), ensuring that the crosshair displays information even where LWC native labels are suppressed.
     *   **Clear Crosshair**: Confirms `clearCrossHair()` removes all native and plugin-injected elements.

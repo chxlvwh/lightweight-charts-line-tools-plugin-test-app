@@ -176,7 +176,8 @@ export const useCoreApiTest = (api0, api1, chartRef, series0Ref, chartReady) => 
 	const handleMagnetChange = useCallback((event, newValue) => {
 		setMagnetThreshold(newValue);
 		api0.setMagnetThreshold(newValue);
-	}, [api0]);
+		api1.setMagnetThreshold(newValue);
+	}, [api0,api1]);
 
 	const toggleLock0 = useCallback(() => {
 		const newState = !isLocked0;
