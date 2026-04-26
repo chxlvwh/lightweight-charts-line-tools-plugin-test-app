@@ -27,7 +27,6 @@ import { LineToolFibRetracement } from 'lightweight-charts-line-tools-fib-retrac
 import { LineToolMarketDepth } from 'lightweight-charts-line-tools-market-depth';
 import LineToolTestPanel from './LineToolTestPanel'; 
 import { Box, Grid } from '@mui/material'; 
-import { generate4HourTestData } from '../Data/TrendLineToolData';
 
 // Import from centralized UTC data source
 import { 

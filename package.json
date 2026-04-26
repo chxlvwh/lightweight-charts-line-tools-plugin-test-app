@@ -2,17 +2,22 @@
   "name": "lightweight-charts-line-tools-plugin-test-app",
   "version": "0.2.0",
   "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "start": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^9.0.0",
     "@mui/material": "^9.0.0",
+    "@mui/styled-engine-sc": "^9.0.0",
     "@mui/system": "^9.0.0",
-    "@testing-library/dom": "^10.4.1",
-    "@testing-library/jest-dom": "^6.9.1",
-    "@testing-library/react": "^16.3.2",
-    "@testing-library/user-event": "^14.6.1",
-    "lightweight-charts": "^5.1.0",
+    "lightweight-charts": "^5.2.0",
     "lightweight-charts-line-tools-circle": "file:../../lightweight-charts-line-tools-circle",
     "lightweight-charts-line-tools-core": "file:../../lightweight-charts-line-tools-core",
     "lightweight-charts-line-tools-fib-retracement": "file:../../lightweight-charts-line-tools-fib-retracement",
@@ -28,49 +33,16 @@
     "lightweight-charts-line-tools-triangle": "file:../../lightweight-charts-line-tools-triangle",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^5.2.0"
-  },
-  "keywords": [
-    "lightweight-charts",
-    "line tools",
-    "interactive tools",
-    "plugin",
-    "v5",
-    "testing",
-    "validation",
-    "react",
-    "test suite",
-    "automated tests",
-    "unit testing",
-    "integration testing"
-  ],
-  "scripts": {
-    "start": "cross-env PORT=3001 react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "styled-components": "^6.4.1"
   },
   "devDependencies": {
-    "baseline-browser-mapping": "^2.10.19",
-    "cross-env": "^10.1.0"
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "eslint": "^9.17.0",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "vite": "^8.0.10"
   }
 }

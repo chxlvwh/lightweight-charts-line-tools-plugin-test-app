@@ -6,7 +6,7 @@ import {
 } from 'lightweight-charts-line-tools-core';
 
 // --- Import base data helpers ---
-import { baseTimestamp, day, hour, createPoints, createLineToolPoint } from './RectangleToolData'; 
+import { baseTimestamp, day, hour, createPoints } from './RectangleToolData'; 
 import { deepCopy } from 'lightweight-charts-line-tools-core';
 
 

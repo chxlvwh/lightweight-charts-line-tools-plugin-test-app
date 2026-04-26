@@ -9,7 +9,7 @@ import {
 } from 'lightweight-charts-line-tools-core';
 
 // --- Import base data helpers (assuming they are in the same relative path) ---
-import { baseTimestamp, day, hour, createPoints, createLineToolPoint } from '../Hooks/ToolDataUtils';
+import { createLineToolPoint } from '../Hooks/ToolDataUtils';
 
 
 // Helper function to create a 3-point position tool structure
